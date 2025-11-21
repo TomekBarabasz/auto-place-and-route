@@ -1,0 +1,14 @@
+name = "CncTools"
+uuid = "d8b80980-4f25-429a-9c28-96410c4e8a6e"
+version = "0.1.0"
+authors = ["Tomek Barabasz <tomek.barabasz@gmail.com>"]
+
+[deps]
+DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+DelaunayTriangulation = "927a84f5-c5f4-47a5-9785-b46e178433df"
+LightXML = "9c8b4983-aa76-5018-a973-4c85ecc9e179"
+
+[compat]
+DataStructures = "0.19.3"
+DelaunayTriangulation = "1.6.5"
+LightXML = "0.9.3"

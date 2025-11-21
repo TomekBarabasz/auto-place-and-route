@@ -146,7 +146,7 @@ function make_cnc_path(points::Vector{Point{T}}, tool_dia, max_error) where T <:
     tool_path
 end
 
-function make_cnc_drill_path(points::Vector{PointF32}, tool_dia, max_error, overlap, n_limit_pts=nothing)
+function make_cnc_drill_path(points::Vector{Point{T}}, tool_dia, max_error, overlap, n_limit_pts=nothing) where T <: AbstractFloat
     perp(p1::Point{T},p2::Point{T}) = p1-p2|>normalize|>perpendicular
     tool_path = Vector{Point{T}}()
     r = cast(tool_dia,Float32)

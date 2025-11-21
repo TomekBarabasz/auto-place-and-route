@@ -1,14 +1,12 @@
 module SVG
 
-export parse_svg_path, read_svg_paths
+export parse_path, read_paths
 
 using LightXML
-if !isdefined(Main, :Bezier)
-    include("Bezier.jl")
-end
-using ..Bezier  # Use parent scope (Main.Bezier)
 
-function read_svg_paths(filename)    
+include("geometry.jl")
+
+function read_paths(filename)    
     paths = Dict{String, String}()
 
     # Parse the XML file
@@ -72,7 +70,7 @@ tokens_left(iter::TokenIterator) = iter.pos < length(iter.tokens)
 get_one_token!(iter::TokenIterator) = (tok = iter.tokens[iter.pos]; iter.pos += 1; tok)
 peek_next_token(iter::TokenIterator) = iter.tokens[iter.pos]
 
-function parse_svg_path(::Type{T}, path::String) where T<:AbstractFloat
+function parse_path(::Type{T}, path::String) where T<:AbstractFloat
     Pt = Point{T}
     curves = Curve{T}[]
     

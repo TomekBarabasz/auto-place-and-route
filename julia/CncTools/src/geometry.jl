@@ -1,15 +1,10 @@
-module Bezier
-
-export  Point, Curve, PointF32, CurveF32, Line, LineF32,
-        midpoint, normalize, perpendicular,distance,
-        subdivide,flatten,flattenr
-
 import Base: +,-,*,/
 
 struct Point{T<:AbstractFloat}
     x::Float32
     y::Float32
 end
+
 +(p1::Point{T}, p2::Point{T}) where T = Point{T}(p1.x + p2.x, p1.y + p2.y)
 -(p1::Point{T}, p2::Point{T}) where T = Point{T}(p1.x - p2.x, p1.y - p2.y)
 *(p1::Point{T}, scale::T) where T = Point{T}(p1.x * scale, p1.y * scale)
@@ -20,7 +15,7 @@ perpendicular(p::Point{T}) where T = Point{T}(-p.y, p.x)
 dot(a::Point{T}, b::Point{T}) where T = a.x*b.x + a.y*b.y
 copy(p::Point{T}) where T = Point{T}(p.x,p.y)
 vdot(a::Point{T},b::Point{T}) where T = a.x * b.y - a.y *b.x
-function rot(p::Point{T}, angle::Real) where T
+function rotate(p::Point{T}, angle::Real) where T
     cos_a = cos(angle)
     sin_a = sin(angle)
     Point{T}(p.x * cos_a - p.y * sin_a, p.x * sin_a + p.y * cos_a)
@@ -80,10 +75,7 @@ function flatten(vec::Vector{Curve{T}}, max_error) where T
     pts    
 end
 
-flattenr(vec,max_error) = flatten(vec,max_error) |> reverse
-
 const PointF32 = Point{Float32}
 const LineF32  = Line{Float32}
 const CurveF32 = Curve{Float32}
 
-end #module
